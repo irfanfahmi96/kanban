@@ -21,7 +21,7 @@
 
 
             <?php foreach ($data['tasks'][$container['container_id']] as $task) : ?>
-                <div class="portlet task_element" <?php if ($task['task_color']) : ?>style="border-left: solid 4px <?php echo unserialize(TASK_COLORS)[$task['task_color']]; ?>;<?php endif; ?>" id="<?php echo $task['task_id']; ?>" data-toggle="modal" data-target="#editTaskModal" data-task_id="<?php echo $task['task_id']; ?>">
+                <!-- <div class="portlet task_element" <?php if ($task['task_color']) : ?>style="border-left: solid 4px <?php echo unserialize(TASK_COLORS)[$task['task_color']]; ?>;<?php endif; ?>" id="<?php echo $task['task_id']; ?>" data-toggle="modal" data-target="#editTaskModal" data-task_id="<?php echo $task['task_id']; ?>">
                     <div class="portlet-border"></div>
                     <div class="portlet-header">
                         <span class="task_title"><?php echo $task['task_title']; ?></span>
@@ -46,7 +46,7 @@
                     <?php endif; ?>
 
 
-                </div>
+                </div> -->
 
                 <!-- new design -->
                 <div class="portlet task_element " <?php if ($task['task_color']) : ?>style="border-left: solid 20px <?php echo unserialize(TASK_COLORS)[$task['task_color']]; ?>;<?php endif; ?>" id="<?php echo $task['task_id']; ?>" data-toggle="modal" data-target="#editTaskModal" data-task_id="<?php echo $task['task_id']; ?>">
@@ -717,10 +717,10 @@
             var data = $(object).sortable('toArray'); // Get array data
             var container_id = $(object).attr("rel"); // Get step_id and we will use it as property name
             var arrayLength = data.length; // no need to explain
-
+            
             /* Create step_id property if it does not exist */
             if (!arguments.hasOwnProperty(container_id)) {
-                arguments[container_id] = new Array();
+                    arguments[container_id] = new Array();
             }
 
             /* Loop through all items */
@@ -781,6 +781,10 @@
                     $('.drag_options').fadeOut(100);
 
                     $('.bin_container').fadeOut(500);
+                    
+                    if (Object.keys(myArguments).length > 1 && !confirm("Are you sure?")) {
+                        return $(this).sortable('cancel');
+                    }
                     /* Send JSON to the server */
                     console.log("Send JSON to the server:<pre>" + JSON.stringify(myArguments) + "</pre>");
 
