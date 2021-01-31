@@ -591,6 +591,12 @@ class Ajax extends CI_Controller
         }
     }
 
+    public function update_task_container()
+    {
+        $data = $this->input->post();
+        $this->db->query("UPDATE tasks SET task_container = '{$data['container_id']}', task_order = (Select MAX(task_order) + 1 from tasks where task_container = '{$data['container_id']}') WHERE task_id = '{$data['task_id']}'");
+    }
+
 
     /*
      * ******* DELETE METHODS

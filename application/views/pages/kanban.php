@@ -909,7 +909,13 @@
             var container_id = ls.data('container_id');
             $(`div[rel=${container_id}]`).append($('#' + task_id))
 
-            // TODO: Update database using ajax
+            $.ajax({
+                url: base_url + "ajax/update_task_container",
+                type: 'post',
+                dataType: 'json',
+                data: {task_id: task_id, container_id: container_id},
+                cache: false,
+            });
         })
     });
 </script>
