@@ -391,6 +391,17 @@ body {
     top: 50%;
     left: -40px;
     transform: translate(0, -50%)rotate(270deg);
+}
+.list-department > li {
+    position: relative;
+}
 
+.list-department > li:hover ul {
+    display: block
+} 
+
+.list-department .list-container {
+    left: 100%;
+    top: -5px;
 }
 

@@ -71,14 +71,33 @@
                             <?php endif; ?>
                         </div> -->
                     </div>
-                    <button class="btn btn-sm blue" href="#" data-toggle="dropdown"> More
-                        <i class="icon-angle-down"></i>
-                    </button>
-                    <ul class="dropdown-menu list-container">
-                        <?php foreach ($data['containers'] as $c) : ?>
-                            <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
-                        <?php endforeach; ?>    
-                    </ul>
+                    <div class="dropdown move-to-container">
+                        <button class="btn btn-sm blue" href="#" data-toggle="dropdown"> Stage
+                            <i class="icon-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu list-container">
+                            <?php foreach ($data['containers'] as $c) : ?>
+                                <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
+                            <?php endforeach; ?>    
+                        </ul>
+                    </div>
+                    <div class="dropdown move-to-department">
+                        <button class="btn btn-sm blue" href="#" data-toggle="dropdown"> Department
+                            <i class="icon-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu list-department">
+                            <?php foreach ($data['boards'] as $b) : ?>
+                                <li data-board_id="<?php echo $b['board_id']; ?>">
+                                    <?php echo $b['board_name']; ?>
+                                    <ul class="dropdown-menu list-container">
+                                        <?php foreach ($b['containers'] as $c) : ?>
+                                            <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
+                                        <?php endforeach; ?>    
+                                    </ul>
+                                </li>
+                            <?php endforeach; ?>    
+                        </ul>
+                    </div>
                     <?php if ($task['task_description']) : ?>
                         <div class="portlet-content" style="display:none"><?php echo nl2br($task['task_description']); ?></div>
                     <?php endif; ?>
@@ -907,8 +926,13 @@
             var ls = $(e.target);
             var task_id = ls.parents('.task_element').attr('id');
             var container_id = ls.data('container_id');
-            $(`div[rel=${container_id}]`).append($('#' + task_id))
-
+            var container = $(`div[rel=${container_id}]`)
+            if (container.length) {
+                container.append($('#' + task_id))
+            }else{
+                $('#' + task_id).remove()
+            }
+            
             $.ajax({
                 url: base_url + "ajax/update_task_container",
                 type: 'post',

@@ -106,6 +106,11 @@ class Home extends CI_Controller {
         }
 
         $data['board_id'] = $board_id;
+        $data['boards'] = $this->db->query("SELECT * FROM boards")->result_array();
+        foreach ($data['boards'] as $key => $board) {
+            $data['boards'][$key]['containers'] = $this->db->query("SELECT * FROM containers WHERE container_board = '{$board['board_id']}'")->result_array();
+        }
+
         $data['containers'] = $this->db->query("SELECT * FROM containers WHERE container_board = '$board_id' ORDER BY container_order ASC")->result_array();
 
 
