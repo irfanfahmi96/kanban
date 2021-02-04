@@ -51,6 +51,7 @@
                 <!-- new design -->
                 <div class="portlet task_element " <?php if ($task['task_color']) : ?>style="border-left: solid 20px <?php echo unserialize(TASK_COLORS)[$task['task_color']]; ?>;<?php endif; ?>" id="<?php echo $task['task_id']; ?>" >
                     <div class="portlet-tag">IV30044</div>
+                    
                     <div class="portlet-header" data-toggle="modal" data-target="#editTaskModal" data-task_id="<?php echo $task['task_id']; ?>">
                         <span class="task_title d-block"><?php echo $task['task_title']; ?></span>
                         <div>OC:</div>
@@ -71,32 +72,37 @@
                             <?php endif; ?>
                         </div> -->
                     </div>
-                    <div class="dropdown move-to-container">
-                        <button class="btn btn-sm blue" href="#" data-toggle="dropdown"> Stage
-                            <i class="icon-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu list-container">
-                            <?php foreach ($data['containers'] as $c) : ?>
-                                <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
-                            <?php endforeach; ?>    
-                        </ul>
-                    </div>
-                    <div class="dropdown move-to-department">
-                        <button class="btn btn-sm blue" href="#" data-toggle="dropdown"> Department
-                            <i class="icon-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu list-department">
-                            <?php foreach ($data['boards'] as $b) : ?>
-                                <li data-board_id="<?php echo $b['board_id']; ?>">
-                                    <?php echo $b['board_name']; ?>
-                                    <ul class="dropdown-menu list-container">
-                                        <?php foreach ($b['containers'] as $c) : ?>
-                                            <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
-                                        <?php endforeach; ?>    
-                                    </ul>
-                                </li>
-                            <?php endforeach; ?>    
-                        </ul>
+                    <div class="portlet-action">
+                        <div class="dropdown move-to-container">
+                            <button class="btn btn-sm blue" href="#" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-option-horizontal"></i>
+                            </button>
+                            <ul class="dropdown-menu list-container">
+                                <?php foreach ($data['containers'] as $c) : ?>
+                                    <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
+                                <?php endforeach; ?>    
+                            </ul>
+                        </div>
+                        <div class="dropdown move-to-department">
+                            <button class="btn btn-sm blue" href="#" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-share-alt"></i>
+                            </button>
+                            <ul class="dropdown-menu list-department">
+                                <?php foreach ($data['boards'] as $b) : ?>
+                                    <li data-board_id="<?php echo $b['board_id']; ?>">
+                                        <?php echo $b['board_name']; ?>
+                                        <ul class="dropdown-menu list-container">
+                                            <?php foreach ($b['containers'] as $c) : ?>
+                                                <li data-container_id="<?php echo $c['container_id']; ?>"><?php echo $c['container_name']; ?></li>
+                                            <?php endforeach; ?>    
+                                        </ul>
+                                    </li>
+                                <?php endforeach; ?>    
+                            </ul>
+                        </div>
+                        <div class="circle">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </div>
                     </div>
                     <?php if ($task['task_description']) : ?>
                         <div class="portlet-content" style="display:none"><?php echo nl2br($task['task_description']); ?></div>
