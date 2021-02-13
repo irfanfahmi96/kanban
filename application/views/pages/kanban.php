@@ -777,9 +777,9 @@
                 placeholder: "li-placeholder",
                 /* That's fired first */
                 start: function(event, ui) {
-                    $('.column').css('overflow-y', 'inherit'); // fix for x scroll bug
+                    // $('.column').css('overflow-y', 'inherit'); // fix for x scroll bug
                     myArguments = {};
-                    /*$('.column').css('overflow', 'hidden');*/
+                    // $('.column').css('overflow', 'hidden');
                     ui.item.addClass('rotate');
                     globalTimer = setTimeout(function() {
                         $('.drag_options').fadeIn(300);
@@ -807,7 +807,7 @@
                 stop: function(event, ui) {
                     clearTimeout(globalTimer);
                     ui.item.removeClass('rotate');
-                    $('.column').css('overflow-y', 'auto'); // fix for x scroll bug
+                    // $('.column').css('overflow-y', 'auto'); // fix for x scroll bug
                     if ($(ui.item.parent()[0]).attr('rel') == 'archive' || $(ui.item.parent()[0]).attr('rel') == 'bin') {
                         ui.item.hide();
                     }
