@@ -100,7 +100,7 @@
                                 <?php endforeach; ?>    
                             </ul>
                         </div>
-                        <div class="circle">
+                        <div class="btn-complete circle">
                             <i class="glyphicon glyphicon-ok"></i>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
 
 </div>
 
-<div class="drag_options" style="display:none;">
+<!-- <div class="drag_options" style="display:none;">
 
     <div class="darg_options_container">
 
@@ -130,7 +130,7 @@
         <div class="clearfix"></div>
     </div>
 
-</div>
+</div> -->
 
 <div class="board-footer hidden-xs" style="background-color:<?php echo unserialize(NAVBAR_COLORS)[$data['configs']['conf_navbar_color']]; ?>;">
 
@@ -945,6 +945,20 @@
                 dataType: 'json',
                 data: {task_id: task_id, container_id: container_id},
                 cache: false,
+            });
+        })
+
+        $('.btn-complete').on('click', (e) => {
+            var task = $(e.target).parents('.task_element');
+            var task_id = task.attr('id');
+            if(!confirm('Are you sure to mark as complete!?')) return
+            task.remove();
+            $.ajax({
+                url: base_url + "ajax/update_field/tasks/task_archived/1/task_id/" + task_id,
+                type: 'post',
+                dataType: 'json',
+                data: myArguments,
+                cache: false
             });
         })
     });

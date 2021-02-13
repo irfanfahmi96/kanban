@@ -1,9 +1,9 @@
 <div class="row" style="padding:100px">
     <div class="col-md-12" style="background-color: #fafafa;">
-        <h3><?php echo e('Archived tasks!', true); ?></h3>
+        <h3><?php echo e('Complete tasks!', true); ?></h3>
 
         <?php if ($data['tasks']->num_rows() < 1): ?>
-            <p><?php echo e('Your task archive is empty!', true); ?></p>
+            <p><?php echo e('Your Complete task is empty!', true); ?></p>
         <?php else: ?>
             <table class="table">
 
